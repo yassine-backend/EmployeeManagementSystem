@@ -1,5 +1,6 @@
 import os
 import sys
+import json
 employees = {}
 
 def clear_console():
@@ -80,6 +81,28 @@ def Update_Salary():
     print("Done! The New Salary Of ",Name," Is",Salary)
     
 
+def save_db(data, filename="data.json"):
+    with open(filename, "w") as f:
+        json.dump(data, f)
+
+def load_db(filename="data.json"):
+    # If file does not exist, create it with empty dict
+    if not os.path.exists(filename):
+        with open(filename, "w") as f:
+            json.dump({}, f)
+        return {}
+
+    # If file exists but is empty or invalid JSON, reset it
+    try:
+        with open(filename, "r") as f:
+            return json.load(f)
+    except (json.JSONDecodeError, FileNotFoundError):
+        with open(filename, "w") as f:
+            json.dump({}, f)
+        return {}
+
+employees = load_db()
+
 while True:
     exit_flag = False
     clear_console()
@@ -89,14 +112,17 @@ while True:
     try:
         if Choise == "1":
             Add_employer()
+            save_db(employees)
         if Choise == "2":
             View_employer()
         if Choise == "3":
             Search_employer()
         if Choise == "4":
             Delete_employer()
+            save_db(employees)
         if Choise == "5":
             Update_Salary()
+            save_db(employees)
         if Choise == "6":
             #Exit Choice
             clear_console()
@@ -107,5 +133,5 @@ while True:
         print("Invalid Number!")
     finally:
         if not exit_flag:
-            input("Press Any Key To Back to Menu...")
+            input("Press Enter To Back to Menu...")
             clear_console()
