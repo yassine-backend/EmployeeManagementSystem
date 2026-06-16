@@ -74,6 +74,7 @@ def Update_Salary():
     if Salary <0 or Salary>99999:
         clear_console()
         print("Invalid Input Try Again Between 0-99999")
+        return
     employees[Name]["Salary_value"] = Salary
     clear_console()
     print("Done! The New Salary Of ",Name," Is",Salary)
