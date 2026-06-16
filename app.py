@@ -113,17 +113,17 @@ while True:
         if Choise == "1":
             Add_employer()
             save_db(employees)
-        if Choise == "2":
+        elif Choise == "2":
             View_employer()
-        if Choise == "3":
+        elif Choise == "3":
             Search_employer()
-        if Choise == "4":
+        elif Choise == "4":
             Delete_employer()
             save_db(employees)
-        if Choise == "5":
+        elif Choise == "5":
             Update_Salary()
             save_db(employees)
-        if Choise == "6":
+        elif Choise == "6":
             #Exit Choice
             clear_console()
             print("See You Soon <3")
